@@ -99,6 +99,73 @@ function calculateTotalsTRANSFER() {
 document.addEventListener("input", calculateTotalsTRANSFER);
 
 
+/* ================= AUTO SAVE ================= */
+function saveData() {
+  const data = [];
+  document.querySelectorAll(".num-only").forEach(cell => {
+    data.push(cell.textContent);
+  });
+  localStorage.setItem("warehouseData", JSON.stringify(data));
+}
+
+function loadData() {
+  const saved = JSON.parse(localStorage.getItem("warehouseData"));
+  if (!saved) return;
+
+  document.querySelectorAll(".num-only").forEach((cell, i) => {
+    cell.textContent = saved[i] || "";
+  });
+  calculateAll();
+}
+
+document.addEventListener("input", (e) => {
+  if (e.target.classList.contains("num-only")) {
+    saveData();
+  }
+});
+
+window.addEventListener("load", loadData);
+
+
+/* ================= SAVE TO EXCEL ================= */
+function exportExcel() {
+  let csv = [];
+  document.querySelectorAll("#monitoringTable tr").forEach(row => {
+    let cols = [];
+    row.querySelectorAll("th, td").forEach(cell => {
+      cols.push(`"${cell.innerText}"`);
+    });
+    csv.push(cols.join(","));
+  });
+
+  const blob = new Blob([csv.join("\n")], { type: "text/csv" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "Warehouse_Daily_Movement_Monitoring.csv";
+  link.click();
+}
+
+/* ================= Status Colors ================= */
+function applyStatusColors() {
+  document.querySelectorAll(".num-only").forEach(cell => {
+    const val = parseInt(cell.textContent || 0);
+    cell.classList.remove("status-zero", "status-active");
+
+    if (val === 0) cell.classList.add("status-zero");
+    if (val > 0) cell.classList.add("status-active");
+  });
+}
+
+applyStatusColors();
+
+/* ================= Fullscreen ================= */
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
 
 
 
