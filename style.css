@@ -33,10 +33,10 @@ body {
     font-size: 18px;
   }
 
-#kpi-mrs, #kpi-deliveries, #kpi-transfer{
-    font-size: 30px;
+ #kpi-mrs, #kpi-deliveries, #kpi-transfer{
+    font-size: 32px;
     font-weight: 600;
-}
+  }
 
 
   .kpi-blue { background: #2563eb; }
@@ -120,3 +120,4 @@ body {
 
 
   
+
