@@ -1,87 +1,122 @@
-// ================= DATE & TIME =================
-function updateDateTime() {
-    const now = new Date();
-    document.getElementById("datetime").innerText =
-      now.toLocaleDateString() + " " + now.toLocaleTimeString();
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
   }
-  setInterval(updateDateTime, 1000);
-  updateDateTime();
+  
+  header {
+    background: #1f2937;
+    color: white;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ⬅ left title, right datetime */
+  }
 
-function calculateTotalsMRS() {
-    let mrsTotal = 0;
-    
+  #datetime {
+    font-size: 34px;
+    font-weight: 600;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .kpi-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+  }
   
-    // Calculate each MRS row
-    document.querySelectorAll(".mrs-row").forEach(row => {
-      let rowSum = 0;
-      row.querySelectorAll("td[contenteditable]").forEach(cell => {
-        rowSum += parseInt(cell.innerText) || 0;
-      });
-      row.querySelector(".row-total").innerText = rowSum;
-      mrsTotal += rowSum;
-    });
+  .kpi {
+    flex: 1;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+  }
+
+  #kpi-mrs, #kpi-deliveries, #kpi-transfer{
+    font-size: 33px;
+    font-weight: 600;   
+  }
   
-    // Update TOTAL MRS row
-    document.getElementById("mrs-total").innerText = mrsTotal;
+  .kpi-blue { background: #2563eb; }
+  .kpi-green { background: #16a34a; }
+  .kpi-orange { background: #ea580c; }
   
-    // KPI
-    document.getElementById("kpi-mrs").innerText = mrsTotal;
- 
-    }
+  table {
+    width: 98%;
+    margin: auto;
+    border-collapse: collapse;
+    background: white;
+  }
   
-  document.addEventListener("input", calculateTotalsMRS);
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  th {
+    background: #111827;
+    color: white;
+  }
+  
+  .section.mrs td { background: #e0f2fe; }
+  .section.delivery td { background: #dcfce7; }
+  .section.transfer td { background: #ffedd5; }
+  
+  .row-total {
+    font-weight: bold;
+    background: #facc15;
+  }
 
 
+  .section-header.mrs td {
+    background: #2563eb;
+    color: white;
+    font-size: 18px;
+  }
+  
+  .mrs-row td {
+    background: #e0f2fe;
+  }
+  
+  .mrs-row td:first-child {
+    font-weight: 600;
+    text-align: left;
+  }
+  
+  
+  .section-header.deliveries td {
+    background: #16a34a;
+    color: white;
+    font-size: 18px;
+  }
+  
+  .deliveries-row td {
+    background: #e0f2fe;
+  }
+  
+  .deliveries-row td:first-child {
+    font-weight: 600;
+    text-align: left;
+  }
 
 
-  function calculateTotalsDELIVERIES() {    
-    let deliveriesTotal = 0;
+  .section-header.transfer td {
+    background: #ea580c;
+    color: white;
+    font-size: 18px;
+  }
   
-    // Calculate each DELIVERIES row
-    document.querySelectorAll(".deliveries-row").forEach(row => {
-      let rowSum = 0;
-      row.querySelectorAll("td[contenteditable]").forEach(cell => {
-        rowSum += parseInt(cell.innerText) || 0;
-      });
-      row.querySelector(".row-total").innerText = rowSum;
-      deliveriesTotal += rowSum;
-    });
+  .transfer-row td {
+    background: #e0f2fe;
+  }
   
-    // Update TOTAL DELIVERIES row
-    document.getElementById("deliveries-total").innerText = deliveriesTotal;
-  
-    // KPI
-    document.getElementById("kpi-deliveries").innerText = deliveriesTotal;
- 
-    }
-  
-  document.addEventListener("input", calculateTotalsDELIVERIES);
+  .transfer-row td:first-child {
+    font-weight: 600;
+    text-align: left;
+  }
 
-
-
-
-  function calculateTotalsTRANSFER() {    
-    let transferTotal = 0;
-  
-    // Calculate each TRANSFER row
-    document.querySelectorAll(".transfer-row").forEach(row => {
-      let rowSum = 0;
-      row.querySelectorAll("td[contenteditable]").forEach(cell => {
-        rowSum += parseInt(cell.innerText) || 0;
-      });
-      row.querySelector(".row-total").innerText = rowSum;
-      transferTotal += rowSum;
-    });
-  
-    // Update TOTAL TRANSFER row
-    document.getElementById("transfer-total").innerText = transferTotal;
-  
-    // KPI
-    document.getElementById("kpi-transfer").innerText = transferTotal;
- 
-    }
-  
-  document.addEventListener("input", calculateTotalsTRANSFER);
 
 
   
