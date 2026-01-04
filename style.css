@@ -118,7 +118,29 @@ body {
     text-align: left;
   }
 
+#button-export-excel{
+  text-align: right;
+  padding: 20px;
+}
+
+.num-only {
+  text-align: center;
+  font-weight: bold;
+}
+
+.status-zero {
+  background: #e0e0e0;
+  color: #000;
+}
+
+.status-active {
+  background: #d1f5d3;
+  color: #1b5e20;
+}
+
+
 
   
+
 
 
