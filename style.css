@@ -30,9 +30,15 @@ body {
     padding: 20px;
     border-radius: 10px;
     color: white;
-    font-size: 22px;
+    font-size: 18px;
   }
-  
+
+#kpi-mrs, #kpi-deliveries, #kpi-transfer{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+
   .kpi-blue { background: #2563eb; }
   .kpi-green { background: #16a34a; }
   .kpi-orange { background: #ea580c; }
@@ -111,5 +117,6 @@ body {
     font-weight: 600;
     text-align: left;
   }
+
 
   
