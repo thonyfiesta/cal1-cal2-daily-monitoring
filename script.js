@@ -1,122 +1,104 @@
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-    margin: 0;
-  }
-  
-  header {
-    background: #1f2937;
-    color: white;
-    padding: 15px 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* ⬅ left title, right datetime */
-  }
+// ================= DATE & TIME =================
+function updateDateTime() {
+  const now = new Date();
+  document.getElementById("datetime").innerText =
+    now.toLocaleDateString() + " " + now.toLocaleTimeString();
+}
+setInterval(updateDateTime, 1000);
+updateDateTime();
 
-  #datetime {
-    font-size: 34px;
-    font-weight: 600;
-    text-align: right;
-    white-space: nowrap;
-  }
-  .kpi-container {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-  }
-  
-  .kpi {
-    flex: 1;
-    padding: 20px;
-    border-radius: 10px;
-    color: white;
-    font-size: 18px;
-  }
-
-  #kpi-mrs, #kpi-deliveries, #kpi-transfer{
-    font-size: 33px;
-    font-weight: 600;   
-  }
-  
-  .kpi-blue { background: #2563eb; }
-  .kpi-green { background: #16a34a; }
-  .kpi-orange { background: #ea580c; }
-  
-  table {
-    width: 98%;
-    margin: auto;
-    border-collapse: collapse;
-    background: white;
-  }
-  
-  th, td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  th {
-    background: #111827;
-    color: white;
-  }
-  
-  .section.mrs td { background: #e0f2fe; }
-  .section.delivery td { background: #dcfce7; }
-  .section.transfer td { background: #ffedd5; }
-  
-  .row-total {
-    font-weight: bold;
-    background: #facc15;
-  }
+function calculateTotalsMRS() {
+  let mrsTotal = 0;
 
 
-  .section-header.mrs td {
-    background: #2563eb;
-    color: white;
-    font-size: 18px;
-  }
+// input only number
+document.addEventListener("input", function (e) {
+if (e.target.classList.contains("num-only")) {
+  e.target.textContent = e.target.textContent.replace(/\D/g, '');
+}
+});
+
+// Optional: prevent Enter key (clean dashboard look)
+document.addEventListener("keydown", function (e) {
+if (e.target.classList.contains("num-only") && e.key === "Enter") {
+  e.preventDefault();
+}
+});
   
-  .mrs-row td {
-    background: #e0f2fe;
-  }
-  
-  .mrs-row td:first-child {
-    font-weight: 600;
-    text-align: left;
-  }
-  
-  
-  .section-header.deliveries td {
-    background: #16a34a;
-    color: white;
-    font-size: 18px;
-  }
-  
-  .deliveries-row td {
-    background: #e0f2fe;
-  }
-  
-  .deliveries-row td:first-child {
-    font-weight: 600;
-    text-align: left;
+
+// Calculate each MRS row
+document.querySelectorAll(".mrs-row").forEach(row => {
+let rowSum = 0;
+  row.querySelectorAll("td[contenteditable]").forEach(cell => {
+      rowSum += parseInt(cell.innerText) || 0;
+});
+  row.querySelector(".row-total").innerText = rowSum;
+    mrsTotal += rowSum;
+});
+
+  // Update TOTAL MRS row
+  document.getElementById("mrs-total").innerText = mrsTotal;
+
+  // KPI
+  document.getElementById("kpi-mrs").innerText = mrsTotal;
+
   }
 
-
-  .section-header.transfer td {
-    background: #ea580c;
-    color: white;
-    font-size: 18px;
-  }
-  
-  .transfer-row td {
-    background: #e0f2fe;
-  }
-  
-  .transfer-row td:first-child {
-    font-weight: 600;
-    text-align: left;
-  }
+document.addEventListener("input", calculateTotalsMRS);
 
 
 
-  
+
+function calculateTotalsDELIVERIES() {    
+  let deliveriesTotal = 0;
+
+  // Calculate each DELIVERIES row
+  document.querySelectorAll(".deliveries-row").forEach(row => {
+    let rowSum = 0;
+    row.querySelectorAll("td[contenteditable]").forEach(cell => {
+      rowSum += parseInt(cell.innerText) || 0;
+    });
+    row.querySelector(".row-total").innerText = rowSum;
+    deliveriesTotal += rowSum;
+  });
+
+  // Update TOTAL DELIVERIES row
+  document.getElementById("deliveries-total").innerText = deliveriesTotal;
+
+  // KPI
+  document.getElementById("kpi-deliveries").innerText = deliveriesTotal;
+
+  }
+
+document.addEventListener("input", calculateTotalsDELIVERIES);
+
+
+
+
+function calculateTotalsTRANSFER() {    
+  let transferTotal = 0;
+
+  // Calculate each TRANSFER row
+  document.querySelectorAll(".transfer-row").forEach(row => {
+    let rowSum = 0;
+    row.querySelectorAll("td[contenteditable]").forEach(cell => {
+      rowSum += parseInt(cell.innerText) || 0;
+    });
+    row.querySelector(".row-total").innerText = rowSum;
+    transferTotal += rowSum;
+  });
+
+  // Update TOTAL TRANSFER row
+  document.getElementById("transfer-total").innerText = transferTotal;
+
+  // KPI
+  document.getElementById("kpi-transfer").innerText = transferTotal;
+
+  }
+
+document.addEventListener("input", calculateTotalsTRANSFER);
+
+
+
+
+
